@@ -26,16 +26,6 @@ Public Sub CarregarDaLinhaDoGrid(ByVal pSpread As Object, ByVal pRow As Long)
     
     Set rsGrid = pSpread.DataSource
     
-    If rsGrid Is Nothing Then
-        Err.Raise vbObjectError + 1000, "clsTarefaGrid", "DataSource do Spread não é um Recordset válido."
-    End If
-    
-    If pRow > 0 And pRow <= rsGrid.RecordCount Then
-        rsGrid.AbsolutePosition = pRow
-    Else
-        Err.Raise vbObjectError + 1001, "clsTarefaGrid", "Linha selecionada inválida para carregar dados."
-    End If
-    
     Me.ID = rsGrid.Fields("ID").Value
     Me.Descricao = rsGrid.Fields("Descricao").Value
     Me.Prioridade = rsGrid.Fields("Prioridade").Value
