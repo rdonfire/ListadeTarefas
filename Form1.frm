@@ -153,7 +153,7 @@ Dim taskId As Long
 Select Case Index
     Case 0
         If Trim(txtDescricao.Text) = "" Then
-            MsgBox "A descriÁ„o da tarefa n„o pode estar vazia.", vbExclamation
+            MsgBox "A descri√ß√£o da tarefa n√£o pode estar vazia.", vbExclamation
             Exit Sub
         End If
 
@@ -169,7 +169,7 @@ Select Case Index
             taskId = 0
         End If
 
-        If taskId > 0 Then    ' Se taskId for maior que 0, estamos no modo de ediÁ„o
+        If taskId > 0 Then
             sql = "UPDATE Tarefas SET Descricao = '" & Descricao & "', " & _
                     "Prioridade = '" & Prioridade & "', " & _
                     "DataVencimento = CONVERT(DATETIME, '" & Format(dataPrevista, "yyyy-mm-dd hh:mm:ss") & "', 120), " & _
@@ -177,7 +177,7 @@ Select Case Index
 
             conn.Execute sql
             MsgBox "Tarefa atualizada com sucesso!", vbInformation
-        Else    ' Se taskId for 0, estamos no modo de adiÁ„o
+        Else
             sql = "INSERT INTO Tarefas (Descricao, Prioridade, DataVencimento, Concluida) VALUES ('" & _
                     Descricao & "', '" & Prioridade & "', CONVERT(DATETIME, '" & Format(dataPrevista, "yyyy-mm-dd hh:mm:ss") & "', 120), " & concluidaStatus & ")"
 
@@ -204,7 +204,7 @@ Select Case Index
         chk_concluida.Value = IIf(oTarefa.Concluida, vbChecked, vbUnchecked)
 
         Me.Tag = oTarefa.ID
-        Btn(0).Caption = "Salvar EdiÁ„o"
+        Btn(0).Caption = "Salvar Edi√ß√£o"
 
     Case 2
         If fpTarefas.ActiveRow <= 0 Or fpTarefas.ActiveRow > fpTarefas.MaxRows - 1 Then
@@ -216,27 +216,27 @@ Select Case Index
         oTarefaExcluir.CarregarDaLinhaDoGrid fpTarefas, fpTarefas.ActiveRow
         taskId = oTarefaExcluir.ID
 
-        If MsgBox("Tem certeza que deseja excluir a tarefa '" & oTarefaExcluir.Descricao & "' (ID: " & taskId & ")?", vbYesNo + vbQuestion, "Confirmar Exclus„o") = vbYes Then
+        If MsgBox("Tem certeza que deseja excluir a tarefa '" & oTarefaExcluir.Descricao & "' (ID: " & taskId & ")?", vbYesNo + vbQuestion, "Confirmar Exclus√£o") = vbYes Then
             sql = "DELETE FROM Tarefas WHERE ID = " & taskId
             conn.Execute sql
-            MsgBox "Tarefa excluÌda com sucesso!", vbInformation
+            MsgBox "Tarefa exclu√≠da com sucesso!", vbInformation
 
             Call LimparCampos
             PreencherGrid
         Else
-            MsgBox "Exclus„o cancelada.", vbInformation
+            MsgBox "Exclus√£o cancelada.", vbInformation
         End If
     Case 3
         Unload Me
 
     Case Else
-        MsgBox "AÁ„o n„o reconhecida.", vbExclamation
+        MsgBox "A√ß√£o n√£o reconhecida.", vbExclamation
 End Select
 
 Exit Sub
 
 ErroAcoes:
-MsgBox "Ocorreu um erro na aÁ„o do bot„o: " & Err.Description, vbCritical
+MsgBox "Ocorreu um erro na a√ß√£o do bot√£o: " & Err.Description, vbCritical
 End Sub
 Private Sub LimparCampos()
 txtDescricao.Text = ""
@@ -250,7 +250,7 @@ Private Sub Form_Load()
 With cmbPrioridade
     .Clear
     .AddItem "Baixa"
-    .AddItem "MÈdia"
+    .AddItem "M√©dia"
     .AddItem "Alta"
     .ListIndex = 0
 End With
