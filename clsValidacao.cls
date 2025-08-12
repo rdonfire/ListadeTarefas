@@ -15,8 +15,11 @@ Option Explicit
 Private fDescricao As String
 Private fData As Date
 Private fPrioridade As String
-Private fConcluida As Byte
+Private fConcluida As Boolean
 Private fDataConcluida As Date
+Private fMetaID As Integer
+Private fDataCadastro As Date
+
 Public Property Get Descricao() As String
 Descricao = fDescricao
 End Property
@@ -35,10 +38,10 @@ End Property
 Public Property Let Prioridade(ByVal parPrioridade As String)
 fPrioridade = parPrioridade
 End Property
-Public Property Get Concluida() As Integer
+Public Property Get Concluida() As Boolean
 Concluida = fConcluida
 End Property
-Public Property Let Concluida(ByVal parConcluida As Integer)
+Public Property Let Concluida(ByVal parConcluida As Boolean)
 fConcluida = parConcluida
 End Property
 Public Property Get DataConcluida() As Date
@@ -47,33 +50,106 @@ End Property
 Public Property Let DataConcluida(ByVal parDataConcluida As Date)
 fDataConcluida = parDataConcluida
 End Property
-
-Public Function Consultar() As Boolean
+Public Property Get MetaID() As Integer
+MetaID = fMetaID
+End Property
+Public Property Let MetaID(ByVal parMetaID As Integer)
+fMetaID = parMetaID
+End Property
+Public Property Get DataCadastro() As Date
+DataCadastro = fDataCadastro
+End Property
+Public Property Let DataCadastro(ByVal parDataCadastro As Date)
+fDataCadastro = parDataCadastro
+End Property
+Public Function Consulta(ByVal parCodigo As Integer) As Boolean
 On Error GoTo Trata
 Dim sSql As String, sDyna As New ADODB.Recordset
+Dim bResultado As Boolean
+If ConectarBD Then Exit Function
+
+sSql = "SELECT ID, DESCRICAO, DATAVENCIMENTO, PRIORIDADE, CONCLUIDA FROM METAS WHERE ID = " & parCodigo
 
 With sDyna
-    sSql = "SELECT ID, DESCRICAO, DATAVENCIMENTO, PRIORIDADE, CONCLUIDA FROM METAS"
-
+    .Open sSql, conn, adOpenForwardOnly, adLockReadOnly
+    If Not .EOF Then
+        If IsNull(!ID) Then
+            MsgBox "Meta não localizada!", vbExclamation
+        Else
+            fMetaID = !ID
+            fDescricao = !Descricao
+            fPrioridade = !Prioridade
+            fConcluida = !Concluida
+            fData = !Datavencimento
+        End If
+        bResultado = True
+    End If
+    .Close
 End With
+Consulta = bResultado
+Set sDyna = Nothing
+Exit Function
 
 Trata:
-
-End Function
-
-Public Function Adicionar(ByVal parDescricao As String, ByVal parData As Date, ByVal parPrioridade As String, Optional ByVal parConcluida As Byte = 0, Optional ByVal parDataConclusao As Date) As Boolean
-Dim sSql As String
-
-sSql = "INSERT INTO METAS (DESCRICAO, DATAVENCIMENTO, PRIORIDADE, CONCLUIDA, DATACONCLUIDA) VALUES ('" & parDescricao & "','" & parData & "','" & parPrioridade & "','" & parConcluida & "','" & parDataConclusao & "')"
-
-If Not ExecutarSQL(sSql) Then
-    Adicionar = False
-Else
-    Adicionar = True
+MsgBox "ERRO NA CONSULTAR: " & Err.Description, "clsMeta.Consulta", vbInformation
+Consulta = False
+If Not sDyna Is Nothing Then
+    If sDyna.State = adStateOpen Then
+        sDyna.Close
+    End If
+    Set sDyna = Nothing
 End If
 End Function
+Public Function Adicionar() As Boolean
+Dim sSql As String
+If Not ValidaMetaID(MetaID) Then
+    sSql = "INSERT INTO METAS (DESCRICAO, DATAVENCIMENTO, PRIORIDADE, DATACADASTRO, CONCLUIDA, DATACONCLUIDA) VALUES ('" & fDescricao & "','" & fData & "','" & fPrioridade & "','" & fDataCadastro & "','" & fConcluida & "','" & fDataConcluida & "')"
+Else
+    sSql = "UPDATE METAS SET DESCRICAO = '" & Descricao & "'," & _
+            "DATAVENCIMENTO = '" & Data & "'," & _
+            "PRIORIDADE = '" & Prioridade & "'," & _
+            "CONCLUIDA = '" & Concluida & "'," & _
+            "DATACONCLUIDA = '" & DataConcluida & "'" & _
+            "WHERE ID = " & MetaID
+End If
+If ExecutarSQL(sSql) Then Adicionar = True
+End Function
+Public Function ValidaMetaID(ByVal parCodigo As Integer) As Boolean
+On Error GoTo Trata
+Dim sSql As String, sDyna As New ADODB.Recordset
+Dim bResultado As Boolean
+If ConectarBD Then Exit Function
 
-Public Function atualizar() As Boolean
+sSql = "SELECT ID, DESCRICAO, DATAVENCIMENTO, PRIORIDADE, CONCLUIDA FROM METAS WHERE ID = " & parCodigo
 
+With sDyna
+    .Open sSql, conn, adOpenForwardOnly, adLockReadOnly
+    If Not .EOF Then
+        If IsNull(!ID) Then
+            bResultado = False
+        End If
+        bResultado = True
+    End If
+    .Close
+End With
+ValidaMetaID = bResultado
+Set sDyna = Nothing
+Exit Function
+
+Trata:
+MsgBox "ERRO NA CONSULTAR: " & Err.Description, "clsMeta.Consulta", vbInformation
+ValidaMetaID = False
+If Not sDyna Is Nothing Then
+    If sDyna.State = adStateOpen Then
+        sDyna.Close
+    End If
+    Set sDyna = Nothing
+End If
+End Function
+Public Function ExcluirMeta(ByVal parCodigo As Integer) As Boolean
+Dim sSql As String
+
+sSql = "DELETE METAS WHERE ID = " & parCodigo
+If ExecutarSQL(sSql) Then ExcluirMeta = True
 End Function
 

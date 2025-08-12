@@ -14,32 +14,28 @@ Begin VB.Form Form1
    ScaleHeight     =   7545
    ScaleWidth      =   14145
    StartUpPosition =   3  'Windows Default
-   Begin VB.CommandButton Btn 
-      Caption         =   "Editar"
-      Height          =   495
-      Index           =   5
-      Left            =   6600
-      TabIndex        =   21
-      Top             =   360
-      Width           =   1455
+   Begin VB.CommandButton btn 
+      Caption         =   "Incluir"
+      Height          =   855
+      Index           =   0
+      Left            =   9240
+      OLEDropMode     =   1  'Manual
+      Picture         =   "Form1.frx":0000
+      Style           =   1  'Graphical
+      TabIndex        =   24
+      Top             =   240
+      Width           =   1095
    End
-   Begin VB.CommandButton Btn 
-      Caption         =   "Pesquisar"
-      Height          =   495
-      Index           =   4
-      Left            =   6600
-      TabIndex        =   20
-      Top             =   360
-      Width           =   1455
-   End
-   Begin VB.CommandButton Btn 
+   Begin VB.CommandButton btn 
       Caption         =   "Sair"
-      Height          =   495
+      Height          =   855
       Index           =   3
-      Left            =   12360
-      TabIndex        =   10
-      Top             =   360
-      Width           =   1455
+      Left            =   12840
+      Picture         =   "Form1.frx":10CA
+      Style           =   1  'Graphical
+      TabIndex        =   9
+      Top             =   240
+      Width           =   1095
    End
    Begin FPSpreadADO.fpSpread GridPrincipal 
       Height          =   3375
@@ -51,6 +47,7 @@ Begin VB.Form Form1
       _ExtentX        =   24580
       _ExtentY        =   5953
       _StockProps     =   64
+      BackColorStyle  =   3
       DAutoCellTypes  =   0   'False
       DAutoFill       =   0   'False
       DAutoSave       =   0   'False
@@ -65,121 +62,158 @@ Begin VB.Form Form1
          Strikethrough   =   0   'False
       EndProperty
       FormulaSync     =   0   'False
-      MaxCols         =   7
+      GrayAreaBackColor=   -2147483633
+      GridColor       =   -2147483633
+      MaxCols         =   8
       MaxRows         =   1
       RestrictCols    =   -1  'True
       RestrictRows    =   -1  'True
-      SpreadDesigner  =   "Form1.frx":0000
+      SelectBlockOptions=   9
+      ShadowColor     =   -2147483626
+      ShadowDark      =   -2147483638
+      SpreadDesigner  =   "Form1.frx":2194
       Appearance      =   2
    End
-   Begin VB.CommandButton Btn 
+   Begin VB.CommandButton btn 
       Caption         =   "Cancelar"
-      Height          =   495
+      Height          =   855
       Index           =   2
-      Left            =   10560
-      TabIndex        =   12
-      Top             =   360
-      Width           =   1455
+      Left            =   11640
+      Picture         =   "Form1.frx":262D
+      Style           =   1  'Graphical
+      TabIndex        =   11
+      Top             =   240
+      Width           =   1095
    End
    Begin VB.Frame QuaPesquisa 
       Caption         =   "Pesquisar"
       Height          =   2655
       Left            =   120
-      TabIndex        =   16
+      TabIndex        =   15
       Top             =   1320
       Width           =   13815
-      Begin VB.ComboBox Combo1 
+      Begin VB.CommandButton btn 
+         Caption         =   "Pesquisar"
+         Height          =   855
+         Index           =   4
+         Left            =   12000
+         Picture         =   "Form1.frx":36F7
+         Style           =   1  'Graphical
+         TabIndex        =   23
+         Top             =   1440
+         Width           =   1095
+      End
+      Begin VB.ComboBox cmbPesquisa 
          Height          =   315
          Left            =   240
-         TabIndex        =   19
+         TabIndex        =   18
          Text            =   "Combo1"
          Top             =   720
          Width           =   3495
       End
       Begin MSComCtl2.DTPicker DTPicker2 
-         Height          =   495
-         Left            =   2760
-         TabIndex        =   18
-         Top             =   1320
-         Width           =   2655
-         _ExtentX        =   4683
-         _ExtentY        =   873
+         Height          =   375
+         Left            =   6240
+         TabIndex        =   17
+         Top             =   720
+         Width           =   2055
+         _ExtentX        =   3625
+         _ExtentY        =   661
          _Version        =   393216
-         Format          =   66781185
+         Format          =   131923969
          CurrentDate     =   45869
       End
       Begin MSComCtl2.DTPicker DTPicker1 
-         Height          =   495
-         Left            =   240
-         TabIndex        =   17
-         Top             =   1320
+         Height          =   375
+         Left            =   3840
+         TabIndex        =   16
+         Top             =   720
          Width           =   2055
          _ExtentX        =   3625
-         _ExtentY        =   873
+         _ExtentY        =   661
          _Version        =   393216
-         Format          =   66781185
+         Format          =   131923969
          CurrentDate     =   45869
       End
    End
-   Begin VB.Frame fram_AddMeta 
+   Begin VB.Frame frAddMeta 
       Caption         =   "Adicionar nova Meta"
-      Height          =   2655
-      Left            =   120
+      Height          =   2895
+      Left            =   0
       TabIndex        =   0
-      Top             =   1320
-      Width           =   13935
+      Top             =   1080
+      Width           =   14175
+      Begin VB.TextBox txtMetaID 
+         Alignment       =   2  'Center
+         BackColor       =   &H80000000&
+         Height          =   375
+         HideSelection   =   0   'False
+         Left            =   240
+         Locked          =   -1  'True
+         TabIndex        =   20
+         Top             =   480
+         Width           =   615
+      End
       Begin MSComCtl2.DTPicker txtDataConclusao 
          Height          =   375
          Left            =   10080
-         TabIndex        =   14
-         Top             =   1680
-         Width           =   1695
-         _ExtentX        =   2990
+         TabIndex        =   13
+         Top             =   2040
+         Width           =   1575
+         _ExtentX        =   2778
          _ExtentY        =   661
          _Version        =   393216
-         Format          =   66781185
+         Format          =   131923969
          CurrentDate     =   45869
       End
       Begin VB.CheckBox chk_concluida 
          Caption         =   "Concluida"
          Height          =   255
-         Left            =   9960
+         Left            =   10080
          TabIndex        =   5
-         Top             =   720
+         Top             =   1080
          Width           =   1575
       End
       Begin MSComCtl2.DTPicker txtDataPrevista 
-         Height          =   255
+         Height          =   375
          Left            =   7200
          TabIndex        =   3
-         Top             =   1680
+         Top             =   2040
          Width           =   1575
          _ExtentX        =   2778
-         _ExtentY        =   450
+         _ExtentY        =   661
          _Version        =   393216
-         Format          =   66781185
+         Format          =   131923969
          CurrentDate     =   45852
       End
       Begin VB.ComboBox cmbPrioridade 
          Height          =   315
          Left            =   7200
          TabIndex        =   1
-         Top             =   720
+         Top             =   1080
          Width           =   2175
       End
       Begin VB.TextBox txtDescricao 
-         Height          =   1575
+         Height          =   1695
          Left            =   240
          TabIndex        =   7
-         Top             =   480
+         Top             =   960
          Width           =   6615
+      End
+      Begin VB.Label lblMetaID 
+         Caption         =   "META ID"
+         Height          =   255
+         Left            =   240
+         TabIndex        =   21
+         Top             =   240
+         Width           =   855
       End
       Begin VB.Label lblDataConclusao 
          Caption         =   "Data de Conclusão"
          Height          =   255
          Left            =   10080
-         TabIndex        =   15
-         Top             =   1320
+         TabIndex        =   14
+         Top             =   1800
          Width           =   1815
       End
       Begin VB.Label Label2 
@@ -187,44 +221,59 @@ Begin VB.Form Form1
          Height          =   255
          Left            =   7200
          TabIndex        =   4
-         Top             =   1320
+         Top             =   1800
          Width           =   1695
       End
       Begin VB.Label Label1 
          Caption         =   "Prioridade"
          Height          =   255
-         Left            =   7320
+         Left            =   7200
          TabIndex        =   2
-         Top             =   360
+         Top             =   840
          Width           =   1455
       End
    End
-   Begin VB.CommandButton Btn 
+   Begin VB.CommandButton btn 
+      Caption         =   "Excluir"
+      Height          =   855
+      Index           =   6
+      Left            =   11640
+      Picture         =   "Form1.frx":47C1
+      Style           =   1  'Graphical
+      TabIndex        =   22
+      Top             =   240
+      Width           =   1095
+   End
+   Begin VB.CommandButton btn 
+      Caption         =   "Editar"
+      Height          =   855
+      Index           =   5
+      Left            =   10440
+      Picture         =   "Form1.frx":588B
+      Style           =   1  'Graphical
+      TabIndex        =   19
+      Top             =   240
+      Width           =   1095
+   End
+   Begin VB.CommandButton btn 
       Caption         =   "Confirmar"
-      Height          =   495
+      Height          =   855
       Index           =   1
-      Left            =   8640
-      TabIndex        =   11
-      Top             =   360
-      Width           =   1455
+      Left            =   10440
+      Picture         =   "Form1.frx":6955
+      Style           =   1  'Graphical
+      TabIndex        =   10
+      Top             =   240
+      Width           =   1095
    End
    Begin VB.Frame frameButton 
       BorderStyle     =   0  'None
       Caption         =   "Frame2"
       Height          =   855
-      Left            =   120
+      Left            =   240
       TabIndex        =   8
       Top             =   120
       Width           =   13935
-      Begin VB.CommandButton Btn 
-         Caption         =   "Incluir"
-         Height          =   495
-         Index           =   0
-         Left            =   8520
-         TabIndex        =   9
-         Top             =   240
-         Width           =   1455
-      End
       Begin VB.Label lbl_Cabecalho 
          Alignment       =   2  'Center
          Caption         =   "AGENDA DE METAS"
@@ -239,7 +288,7 @@ Begin VB.Form Form1
          EndProperty
          Height          =   735
          Left            =   120
-         TabIndex        =   13
+         TabIndex        =   12
          Top             =   120
          Width           =   6615
       End
@@ -251,34 +300,64 @@ Attribute VB_Creatable = False
 Attribute VB_PredeclaredId = True
 Attribute VB_Exposed = False
 Option Explicit
+Dim fContAlteracaoDosCampos As Integer
+Dim fDataCadastro As Date
+Dim sCodigo As String
+Dim fHabilitada As Boolean
+Const MAX_LENGTH As Long = 255
+
+Enum CheckConcluida
+    eNumHabilitada = 1
+    eNumDesatbilida = 0
+End Enum
+
+Enum eNumAtualizar
+    eAtualizar = 0
+    eNaoAtualizar = 1
+End Enum
+
+Enum eNumAcao
+    eIncluir = 0
+    eConfirmar = 1
+    eCancelar = 2
+    eSair = 3
+    ePesquisar = 4
+    eEditar = 5
+    eExcluir = 6
+End Enum
 Private Sub Btn_Click(Index As Integer)
 On Error GoTo ErroAcoes
-    
-    Select Case Index
-        Case 0
-            ajusteButton Index
-            
-        Case 1
-            If Not ValidaD Then Exit Sub
-             If Not PassarDados Then Exit Sub
-                MsgBox "Meta adicionada com Sucesso", vbInformation
-                LimparCampos
-        Case 2
-            ajusteButton Index
-            LimparCampos
-        Case 3
-            Unload Me
-        Case 4
-            AtualizarGrid GridPrincipal
-        Case 5
-            ajusteButton Index
-        Case Else
 
-
-    End Select
-
+Select Case Index
+    Case eNumAcao.eIncluir
+        ajusteButton Index
+        txtDescricao.SetFocus
+    Case eNumAcao.eConfirmar
+        If Not ValidaD Then Exit Sub
+        GerarID
+        PassarDados eNumAtualizar.eAtualizar
+        LimparCampos
+        AtualizarGrid GridPrincipal
+        ajusteButton Index
+    Case eNumAcao.eCancelar
+        ajusteButton Index
+        AtualizarGrid GridPrincipal
+        LimparCampos
+    Case eNumAcao.eSair
+        Dim sResultado As VbMsgBoxResult
+        sResultado = MsgBox("Deseja Sair?", vbYesNo)
+        If sResultado = vbYes Then Unload Me
+    Case eNumAcao.ePesquisar
+        AtualizarGrid GridPrincipal
+    Case eNumAcao.eEditar
+        If Not SelecionarMeta Then Exit Sub
+        ajusteButton Index
+        txtDescricao.SetFocus
+    Case eNumAcao.eExcluir
+        ExcluirMeta
+    Case Else
+End Select
 Exit Sub
-
 ErroAcoes:
 MsgBox "Ocorreu um erro na ação do botão: " & Err.Description, vbCritical
 End Sub
@@ -286,55 +365,59 @@ Private Sub LimparCampos()
 txtDescricao.Text = ""
 txtDataPrevista.Value = Now
 chk_concluida.Value = vbUnchecked
-cmbPrioridade.ListIndex = 0
+txtMetaID = ""
 End Sub
-
 Private Sub chk_concluida_Click()
-If chk_concluida.Value = 1 Then
+If chk_concluida.Value = eNumHabilitada Then
     lblDataConclusao.Visible = True
     txtDataConclusao.Visible = True
     txtDataConclusao.Value = Date
+    fHabilitada = True
 Else
     lblDataConclusao.Visible = False
     txtDataConclusao.Visible = False
     txtDataConclusao.Value = 0
+    fHabilitada = False
 End If
 End Sub
-
 Private Sub Form_Load()
 ajusteButton 1
+'cmbPesquisa.AddItem
 End Sub
 Private Sub ajusteButton(Optional ByVal parBt As Integer = 0)
 If parBt <> 0 And parBt <> 5 Then
-    Btn(0).Visible = True
-    Btn(5).Visible = False
-    Btn(2).Visible = False
-    fram_AddMeta.Visible = False
+    btn(0).Visible = True
+    btn(2).Visible = False
+    frAddMeta.Visible = False
     GridPrincipal.Visible = True
     txtDataConclusao.Visible = False
     lblDataConclusao.Visible = False
     txtDataPrevista.Value = Now
     QuaPesquisa.Visible = True
-    Btn(1).Visible = False
+    btn(1).Visible = False
+    btn(4).Visible = True
+    btn(5).Visible = True
+    btn(6).Visible = True
     Exit Sub
 End If
-Btn(0).Visible = False
-Btn(2).Visible = True
-Btn(5).Visible = True
+btn(0).Visible = False
+btn(2).Visible = True
+btn(5).Visible = False
+btn(6).Visible = False
 If parBt = 5 Then
-    Btn(1).Visible = True
+    btn(1).Visible = True
 Else
-    Btn(1).Visible = False
+    btn(1).Visible = False
+    LimparCampos
+    If Not CarregarCombo(cmbPrioridade, "Prioridades", "DescricaoPrioridade", "IDPrioridade") Then
+        MsgBox "Não foi possível carregar as prioridades.", vbExclamation
+    End If
 End If
-Btn(4).Visible = False
-fram_AddMeta.Visible = True
+btn(4).Visible = False
+frAddMeta.Visible = True
 GridPrincipal.Visible = False
 QuaPesquisa.Visible = False
-
-
-If Not CarregarCombo(cmbPrioridade, "Prioridades", "DescricaoPrioridade", "IDPrioridade") Then
-    MsgBox "Não foi possível carregar as prioridades.", vbExclamation
-End If
+btn(1).Visible = True
 End Sub
 Private Function ValidaD() As Boolean
 
@@ -356,7 +439,6 @@ If txtDataPrevista.Value = "" Then
     Exit Function
 End If
 
-Const MAX_LENGTH As Long = 255
 If Len(txtDescricao.Text) > MAX_LENGTH Then
     MsgBox "A descrição não pode ter mais de " & MAX_LENGTH & " caracteres.", vbExclamation
     txtDescricao.Text = Left(txtDescricao.Text, MAX_LENGTH)
@@ -366,15 +448,34 @@ End If
 
 ValidaD = True
 End Function
-Private Function PassarDados()
+Private Function PassarDados(Optional ByVal parCondicao As Integer)
 On Error GoTo Trata
-Dim sClsMeta As New clsMeta
+Dim sclsMeta As New clsMeta
 
-With sClsMeta
-    If Not .Adicionar(txtDescricao, txtDataPrevista, cmbPrioridade, chk_concluida, txtDataConclusao) Then
-        MsgBox "Não foi possível adicionar a meta. Verifique os dados.", vbExclamation, "Erro ao Salvar"
-        PassarDados = False
-        Exit Function
+fDataCadastro = Now()
+
+With sclsMeta
+
+    .Descricao = txtDescricao
+    .Data = txtDataPrevista
+    .Prioridade = cmbPrioridade
+    .DataCadastro = fDataCadastro
+    .Concluida = chk_concluida
+    .DataConcluida = txtDataConclusao
+    .MetaID = txtMetaID
+
+    If parCondicao = eNumAtualizar.eAtualizar Then
+        If Not .Adicionar() Then
+            MsgBox "Não foi possível adicionar a meta. Verifique os dados.", vbExclamation, "Erro ao Salvar"
+            PassarDados = False
+            Exit Function
+        End If
+    Else
+        If Not .ExcluirMeta(sCodigo) Then
+            MsgBox "Não foi possivel realizar a exclusão da meta selecionada!", vbInformation
+            PassarDados = False
+            Exit Function
+        End If
     End If
 End With
 
@@ -390,7 +491,7 @@ Dim rs As New ADODB.Recordset
 Dim iRow As Long
 Dim sSql As String
 
-sSql = "SELECT ID, DESCRICAO, PRIORIDADE, DATAVENCIMENTO, CONCLUIDA, DATACONCLUIDA FROM METAS ORDER BY DATAVENCIMENTO DESC"
+sSql = "SELECT ID, DESCRICAO, PRIORIDADE, DATAVENCIMENTO, CONCLUIDA, DATACONCLUIDA FROM METAS ORDER BY DATACADASTRO DESC"
 
 If conn.State <> adStateOpen Then
     Call ConectarBD
@@ -410,8 +511,11 @@ Do While Not rs.EOF
     iRow = iRow + 1
     objSpread.MaxRows = iRow
 
-    objSpread.SetText 1, iRow, "Consultar"
-
+    If Not IsNull(rs.Fields("ID").Value) Then
+        objSpread.SetText 1, iRow, rs.Fields("ID").Value
+    Else
+        objSpread.SetText 1, iRow, ""
+    End If
     If Not IsNull(rs.Fields("DESCRICAO").Value) Then
         objSpread.SetText 2, iRow, rs.Fields("DESCRICAO").Value
     Else
@@ -460,17 +564,97 @@ AtualizarGrid = True
 Exit Function
 
 Trata:
-
 MsgBox "Erro ao Atualizar Grid: " & Err.Description, vbCritical
-
 If Not rs Is Nothing Then If rs.State = adStateOpen Then rs.Close
 Set rs = Nothing
 objSpread.BlockMode = False
-AtualizarGrid = False    '
+AtualizarGrid = False
 End Function
-
-Private Sub GridPrincipal_ButtonClick()
-
-  MsgBox "Button!", vbInformation
+Private Function RecebeDados(ByVal parCodigo As String) As Boolean
+On Error GoTo Tratar
+Dim sclsMeta As New clsMeta
+If Not parCodigo = "" Then
+    With sclsMeta
+        If .Consulta(parCodigo) Then
+            txtDescricao = .Descricao
+            cmbPrioridade = .Prioridade
+            txtDataPrevista = .Data
+            txtMetaID = .MetaID
+            habilitaCheckConcluida (.Concluida)
+            RecebeDados = True
+            Exit Function
+        End If
+    End With
+Else
+    RecebeDados = False
+    Exit Function
+End If
+Tratar:
+MsgBox "Erro ao coletar dados! ", vbCritical
+RecebeDados = False
+End Function
+Private Sub habilitaCheckConcluida(ByVal parCheck As Boolean)
+If parCheck Then
+    fHabilitada = True
+    chk_concluida = eNumHabilitada
+End If
 End Sub
+Private Function VerificaSeAlterou(ByVal parCodigo As String) As Boolean
+Dim sclsMeta As New clsMeta
+fContAlteracaoDosCampos = 0
+
+With sclsMeta
+    If .Consulta(parCodigo) Then
+        If txtDescricao <> .Descricao Then
+            fContAlteracaoDosCampos = 1
+            Exit Function
+        End If
+        If cmbPrioridade <> .Prioridade Then
+            fContAlteracaoDosCampos = 1
+            Exit Function
+        End If
+        If txtDataPrevista <> .Data Then
+            fContAlteracaoDosCampos = 1
+            Exit Function
+        End If
+        If fHabilitada <> .Concluida Then
+            fContAlteracaoDosCampos = 1
+            Exit Function
+        End If
+    End If
+End With
+End Function
+Public Sub GerarID()
+Dim sUltimoID As Integer
+
+sUltimoID = PegarCampo("SELECT TOP 1 ID FROM METAS ORDER BY DATACADASTRO DESC")
+
+If txtMetaID = "" Then
+    txtMetaID = sUltimoID + "0001"
+End If
+Exit Sub
+End Sub
+Private Sub GridPrincipal_click(ByVal Row As Long, ByVal Col As Long)
+Dim sclsMeta As clsMeta
+MarcaLinha GridPrincipal, Row, 1, Col, sCodigo
+txtMetaID = sCodigo
+If Row = 8 Then ExcluirMeta
+End Sub
+Private Sub ExcluirMeta()
+Dim sResultado As VbMsgBoxResult
+If Not SelecionarMeta Then Exit Sub
+sResultado = MsgBox("Deseja excluir a meta " & sCodigo & "?", vbYesNo)
+If sResultado = vbYes Then
+    If PassarDados(2) Then MsgBox "Meta excluída com sucesso!", vbInformation
+    AtualizarGrid GridPrincipal
+End If
+End Sub
+Private Function SelecionarMeta() As Boolean
+SelecionarMeta = True
+If Not RecebeDados(txtMetaID) Then
+    MsgBox "Selecione uma META!", vbExclamation
+    SelecionarMeta = False
+    Exit Function
+End If
+End Function
 
